@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="./common_con.xsd"></xs:include>
+	
+	<xs:element name="som1">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="article-id" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="config" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="src-pages" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="serv-cat" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="doc-head"/>
+				<xs:element ref="doc-subhead" minOccurs="0" maxOccurs="1"/>
+				<xs:element maxOccurs="unbounded" ref="info-obj"/>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

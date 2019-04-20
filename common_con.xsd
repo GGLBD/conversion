@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="abagsafe">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="adjust">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="align">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="left"/>
+			<xs:enumeration value="right"/>
+			<xs:enumeration value="center"/>
+			<xs:enumeration value="justify"/>
+			<xs:enumeration value="char"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="applic">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+			<xs:attribute name="applic-type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="engine"/>
+						<xs:enumeration value="component"/>
+					</xs:restriction>
+				</xs:simpleType>	
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="article-id">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="belt-rt">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="bleed">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="c-base" >
+		<xs:complexType>
+			<xs:attribute name="model-yr" type="xs:string" />
+			<xs:attribute name="manufacturer" type="xs:string" />
+			<xs:attribute name="mkt-region" type="xs:string" />
+			<xs:attribute name="make" type="xs:string" />
+			<xs:attribute name="model" type="xs:string" />
+			<xs:attribute name="series" type="xs:string" />
+			<xs:attribute name="submodel" type="xs:string" />
+			<xs:attribute name="vehtype" type="vehtype" />
+			<xs:attribute name="origin" type="origin" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name="c-refs">
+		<xs:attribute name="category">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="accessories"/>
+					<xs:enumeration value="body-cab"/>
+					<xs:enumeration value="brakes"/>
+					<xs:enumeration value="control.systems"/>
+					<xs:enumeration value="driveline-axles"/>
+					<xs:enumeration value="engine"/>
+					<xs:enumeration value="frame-frame.accessories"/>
+					<xs:enumeration value="hvac"/>
+					<xs:enumeration value="restraints"/>
+					<xs:enumeration value="steering"/>
+					<xs:enumeration value="suspension"/>
+					<xs:enumeration value="transaxle-transmission"/>
+					<xs:enumeration value="align"/>
+					<xs:enumeration value="geninf"/>
+					<xs:enumeration value="maint"/>
+					<xs:enumeration value="techinf"/>
+					<xs:enumeration value="vacum"/>
+					<xs:enumeration value="wiring"/>
+					<xs:enumeration value="engine-performance"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="content-type" type="xs:string" />
+	</xs:attributeGroup>
+	
+	<xs:element name="c-srvcat">
+		<xs:complexType>
+			<xs:attributeGroup ref="c-refs" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="c-systm">
+		<xs:complexType>
+			<xs:attributeGroup ref="c-refs" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="callout">
+		<xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element ref="table" />
+				<xs:element ref="chart" />
+			</xs:choice>
+		</xs:complexType>	
+	</xs:element>
+	
+	<xs:element name="caption">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="float"/>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="category-qualifier">
+		<xs:complexType>
+			<xs:attributeGroup ref="symp"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="caution" type="cnwicontent"/>
+
+	<xs:element name="chart">
+		<xs:complexType>
+			<xs:choice>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="tgroup" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="cmp-loc">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:group name="cnwi">
+		<xs:choice>
+			<xs:element ref="caution"/>
+			<xs:element ref="warning"/>
+			<xs:element ref="note"/>
+			<xs:element ref="important"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="cnwicontent">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element ref="para"/>
+			<xs:element ref="ptxt"/>
+			<xs:element ref="list"/>
+			<xs:element ref="figure"/>
+			<xs:element ref="table"/>
+			<xs:element ref="chart"/>
+			<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+		</xs:choice>
+		<xs:attributeGroup ref="vdo"/>
+	</xs:complexType>
+
+	<xs:simpleType name="code.type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="title"/>
+			<xs:enumeration value="posscause"/>
+			<xs:enumeration value="setcondtion"/>
+			<xs:enumeration value="monitorcondtion"/>
+			<xs:enumeration value="cirdesc"/>
+			<xs:enumeration value="test"/>
+			<xs:enumeration value="diagaids"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="colspec">
+		<xs:complexType>
+			<xs:attribute name="colnum" type="xs:integer"/>
+			<xs:attribute name="colname" type="xs:NMTOKEN"/>
+			<xs:attribute name="align" type="align"/>
+			<xs:attribute name="charoff" type="xs:NMTOKEN"/>
+			<xs:attribute name="char" type="xs:string"/>
+			<xs:attribute name="colwidth" type="xs:string"/>
+			<xs:attribute name="colsep" type="xs:integer"/>
+			<xs:attribute name="rowsep" type="xs:integer"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="component">
+		<xs:complexType mixed="true">
+			<xs:attribute name="comp-name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="component-locator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="is"/>
+			<xs:enumeration value="isnt"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="config">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="c-base" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:choice minOccurs="1" maxOccurs="1">
+					<xs:element ref="c-srvcat" minOccurs="1" maxOccurs="1"/>
+					<xs:element ref="c-systm" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="connector-id">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="date" type="xs:string"/>
+
+	<xs:element name="def">
+		<xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="ptxt"/>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			</xs:choice>
+			<xs:attributeGroup ref="refs"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deflist">
+		<xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="term"/>
+				<xs:element ref="def"/>
+			</xs:choice>
+			<xs:attributeGroup ref="refs"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="desc-op">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:simpleType name="dest">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="info-obj"/>
+			<xs:enumeration value="ftnote"/>
+			<xs:enumeration value="lst-itm"/>
+			<xs:enumeration value="fig"/>
+			<xs:enumeration value="tbl"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="diagnose">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="diagram">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="refs"/>
+			<xs:attribute name="diagram-type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="wiring"/>
+						<xs:enumeration value="vacuum"/>
+						<xs:enumeration value="hydraul"/>
+						<xs:enumeration value="mechanical"/>
+						<xs:enumeration value="component-location"/>
+					</xs:restriction>
+				</xs:simpleType>	
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="dis-enab">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="disassm">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="dispo">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="doc-head">
+		<xs:complexType mixed="true">
+			<xs:group minOccurs="0" ref="float"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="doc-subhead">
+		<xs:complexType mixed="true">
+			<xs:group minOccurs="0" ref="float"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="dtc.info.type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="code.description"/>
+			<xs:enumeration value="diagnostic"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="emis-app">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="emph">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:group ref="floatnoemph"/>
+			</xs:choice>
+			<xs:attribute name="etype" use="required" type="etype"/>
+			<xs:attribute name="color" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="entry">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title" minOccurs="0" maxOccurs="1"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+					<xs:group ref="cnwi"/>
+					<xs:element ref="para"/>
+					<xs:element ref="ptxt"/>
+					<xs:element ref="deflist"/>
+					<xs:element ref="list"/>
+					<xs:element ref="graphic"/>
+					<xs:element ref="icon"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="vdo"/>
+			<xs:attribute name="colname" type="xs:NMTOKEN"/>
+			<xs:attribute name="namest" type="xs:NMTOKEN"/>
+			<xs:attribute name="nameend" type="xs:NMTOKEN"/>
+			<xs:attribute name="spanname" type="xs:NMTOKEN"/>
+			<xs:attribute name="morerows" type="xs:integer"/>
+			<xs:attribute name="colsep" type="xs:integer"/>
+			<xs:attribute name="rowsep" type="xs:integer"/>
+			<xs:attribute name="rotate" type="xs:integer"/>
+			<xs:attribute name="valign" type="valign"/>
+			<xs:attribute name="align" type="align"/>
+			<xs:attribute name="charoff" type="xs:NMTOKEN"/>
+			<xs:attribute name="char" type="xs:string"/>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="IDREFS" type="xs:IDREFS"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="enumtype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="bullet"/>
+			<xs:enumeration value="unlabeled"/>
+			<xs:enumeration value="dash"/>
+			<xs:enumeration value="arabicnum"/>
+			<xs:enumeration value="loweralpha"/>
+			<xs:enumeration value="upperalpha"/>
+			<xs:enumeration value="lowerroman"/>
+			<xs:enumeration value="upperroman"/>
+			<xs:enumeration value="legal"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="etype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="bold"/>
+			<xs:enumeration value="boldital"/>
+			<xs:enumeration value="ital"/>
+			<xs:enumeration value="roman"/>
+			<xs:enumeration value="underscore"/>
+			<xs:enumeration value="smallcaps"/>
+			<xs:enumeration value="overbar"/>
+			<xs:enumeration value="overstrike"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="extxref">
+		<xs:complexType mixed="true">
+			<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			<xs:attribute name="document" use="required" type="xs:string"/>
+			<xs:attribute name="extrefid" type="xs:string"/>
+			<xs:attribute name="filetype" type="file-type" default="sgml"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="fault-isolation">
+		<xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="trbshoot"/>
+				<xs:element ref="diagnose"/>
+				<xs:element ref="testing"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="fault.code">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="figure">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:sequence>
+					<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+					<xs:element ref="graphic"/>
+				</xs:sequence>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:sequence>
+					<xs:element ref="caption"/>
+					<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute name="figtype" type="xs:string"/>
+			<xs:attributeGroup ref="parms"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="file-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="sgml"/>
+			<xs:enumeration value="SGML"/>
+			<xs:enumeration value="graphic"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:group name="float">
+		<xs:choice>
+			<xs:element ref="emph"/>
+			<xs:element ref="ftnote"/>
+			<xs:element ref="extxref"/>
+			<xs:element ref="intxref"/>
+			<xs:element ref="multi-ref"/>
+			<xs:element ref="part-num"/>
+			<xs:element ref="softextxref"/>
+			<xs:element ref="sub"/>
+			<xs:element ref="sup"/>
+			<xs:element ref="t-code"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:group name="floatnoemph">
+		<xs:choice>
+			<xs:element ref="ftnote"/>
+			<xs:element ref="extxref"/>
+			<xs:element ref="intxref"/>
+			<xs:element ref="multi-ref"/>
+			<xs:element ref="part-num"/>
+			<xs:element ref="softextxref"/>
+			<xs:element ref="sub"/>
+			<xs:element ref="sup"/>
+			<xs:element ref="t-code"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:group name="floatnoftnote">
+		<xs:choice>
+			<xs:element ref="emph"/>
+			<xs:element ref="extxref"/>
+			<xs:element ref="intxref"/>
+			<xs:element ref="multi-ref"/>
+			<xs:element ref="part-num"/>
+			<xs:element ref="softextxref"/>
+			<xs:element ref="sub"/>
+			<xs:element ref="sup"/>
+			<xs:element ref="t-code"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:element name="ftnote">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:group ref="floatnoftnote"/>
+			</xs:choice>
+			<xs:attributeGroup ref="refs"/>
+			<xs:attribute name="type" type="ftnote-type" default="table"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="ftnote-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="foot"/>
+			<xs:enumeration value="table"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="graphic">
+		<xs:complexType>
+			<xs:attribute name="hotspot" type="yn" default="n"/>
+			<xs:attribute name="graphicname" type="xs:string" use="required"/>
+			<xs:attribute name="oename" type="xs:string"/>
+			<xs:attribute name="quick-courtesy" type="quick-courtesy"/>
+			<xs:attribute name="courtesy" type="xs:string"/>
+			<xs:attributeGroup ref="refs"/>
+			<xs:attributeGroup ref="parms"/>
+			<xs:attribute name="gwidth" type="gwidth"/>
+			<xs:attribute name="gtype" type="xs:string"/>
+			<xs:attribute name="gcategory" type="xs:string"/>
+			<xs:attribute name="width" type="xs:string"/>
+			<xs:attribute name="height" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="gwidth">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1col"/>
+			<xs:enumeration value="2col"/>
+			<xs:enumeration value="1landscape"/>
+			<xs:enumeration value="2landscape"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="icon">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="graphic"/>
+			</xs:sequence>
+			<xs:attribute name="alt-text" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ident">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="important" type="cnwicontent"/>
+
+	<xs:simpleType name="index-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="t-code"/>
+			<xs:enumeration value="none"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="info-obj">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="cnwi"/>
+					<xs:group ref="oe.comp"/>
+					<xs:group ref="oe.dtc"/>
+				</xs:choice>
+				<xs:element ref="title"/>
+				<xs:sequence>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="para"/>
+						<xs:element ref="list"/>
+						<xs:element ref="table"/>
+						<xs:element ref="chart"/>
+						<xs:element ref="figure"/>
+						<xs:element ref="deflist"/>
+						<xs:group ref="cnwi"/>
+						<xs:group ref="oe.comp"/>
+						<xs:group ref="oe.dtc"/>
+					</xs:choice>
+					<xs:element ref="info-obj" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:sequence>
+			<!--xs:attribute name="id" type="xs:ID"/-->
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="content.type"/>
+			<xs:attributeGroup ref="parms"/>
+			<xs:attributeGroup ref="vdo"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="inspect">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="intro">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="intxref">
+		<xs:complexType mixed="true">
+			<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			<xs:attribute name="dest" use="required" type="dest"/>
+			<!--xs:attribute name="refid" use="required" type="xs:IDREF"/-->
+			<xs:attribute name="refid" use="required" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="list">
+		<xs:complexType>
+			<xs:sequence maxOccurs="1">
+				<xs:element ref="title" minOccurs="0" maxOccurs="1"/>
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+					<xs:element ref="lst-itm"/>
+					<xs:element ref="para"/>
+					<xs:element ref="figure"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="type" type="listtype" use="required"/>
+			<xs:attribute name="enumtype" type="enumtype" use="required"/>
+			<xs:attributeGroup ref="vdo"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="listtype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ordered"/>
+			<xs:enumeration value="unordered"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="lst-itm">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="cnwi"/>
+					<xs:element ref="figure"/>
+					<xs:group ref="oe.dtc"/>
+				</xs:choice>
+				<xs:element ref="title" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="ptxt"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="chart"/>
+					<xs:group ref="cnwi"/>
+					<xs:element ref="deflist"/>
+					<xs:element ref="figure"/>
+					<xs:element ref="list"/>
+					<xs:element ref="para"/>
+					<xs:element ref="table"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="refs"/>
+			<xs:attributeGroup ref="parms"/>
+			<xs:attributeGroup ref="vdo"/>
+			<xs:attribute name="item-no" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="lube">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="manufact">
+		<xs:complexType>
+			<xs:attribute name="manuf-id" type="xs:NMTOKENS" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="models" type="xs:string"/>
+
+	<xs:element name="model-id">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="multi-ref">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="intxref"/>
+				<xs:element ref="extxref"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="note" type="cnwicontent"/>
+
+	<xs:element name="obd.code">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="oe.code">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="fault.code"/>
+				<xs:element ref="pid.code"/>
+				<xs:element ref="sid.code"/>
+				<xs:element ref="spn.code"/>
+				<xs:element ref="obd.code"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:group name="oe.comp">
+		<xs:choice>
+			<xs:element ref="oe.component.start"/>
+			<xs:element ref="oe.component.end"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:simpleType name="oe.comp.info.type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="removal"/>
+			<xs:enumeration value="installation"/>
+			<xs:enumeration value="removal.installation"/>
+			<xs:enumeration value="wiring"/>
+			<xs:enumeration value="conn.view"/>
+			<xs:enumeration value="location"/>
+			<xs:enumeration value="testing"/>
+			<xs:enumeration value="spec.torq"/>
+			<xs:enumeration value="spec.capacity"/>
+			<xs:enumeration value="spec.electric"/>
+			<xs:enumeration value="spec.pressure"/>
+			<xs:enumeration value="spec.temp"/>
+			<xs:enumeration value="spec.linear"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="oe.component.end">
+		<xs:complexType>
+			<xs:attribute name="oe.component.id" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="oe.component.name">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="primary" type="yesno" use="required"/>
+			<xs:attribute name="sequence" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="oe.component.start">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="oe.engine.name"/>
+					<xs:element ref="oe.component.name"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="oe.component.id" type="xs:string" use="required"/>
+			<xs:attribute name="system" type="system" default="engine"/>
+			<xs:attribute name="oe.comp.info.type" type="oe.comp.info.type" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:group name="oe.dtc">
+		<xs:choice>
+			<xs:element ref="oe.dtc.start"/>
+			<xs:element ref="oe.dtc.end"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:element name="oe.dtc.end">
+		<xs:complexType>
+			<xs:attribute name="oe.dtc.id" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="oe.dtc.start">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:element ref="oe.engine.name"/>
+					<xs:element ref="oe.code"/>
+				</xs:choice>
+				<xs:element ref="oe.component.name" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="oe.dtc.id" type="xs:string"/>
+			<xs:attribute name="system" type="system" default="engine"/>
+			<xs:attribute name="dtc.info.type" type="dtc.info.type" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="oe.engine.name">
+		<xs:complexType>
+			<xs:attribute name="mfr" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="control.unit" type="xs:string" use="required"/>
+			<xs:attribute name="cylinders" type="xs:string" use="required"/>
+			<xs:attribute name="begin.year" type="xs:string" use="required"/>
+			<xs:attribute name="end.year" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="on-veh-svc">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:simpleType name="origin">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="domestic"/>
+			<xs:enumeration value="import"/>
+			<xs:enumeration value="both"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="overhaul">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="para">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="ptxt"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name="parms">
+		<xs:attribute name="qualifier-id" type="xs:string"/>
+		<xs:attribute name="qualifier-desc" type="xs:string"/>
+		<xs:attribute name="operation-id" type="xs:string"/>
+		<xs:attribute name="operation-desc" type="xs:string"/>
+	</xs:attributeGroup>
+
+	<xs:element name="part-num" type="xs:string"/>
+
+	<xs:element name="pid.code">
+		<xs:complexType>
+			<xs:attribute name="mid" type="xs:string" use="required"/>
+			<xs:attribute name="pid" type="xs:string" use="required"/>
+			<xs:attribute name="fmi" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="pin-volt">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="program">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="ptxt">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:group ref="float"/>
+				<xs:element ref="list"/>
+				<xs:element ref="icon"/>
+			</xs:choice>
+			<xs:attributeGroup ref="vdo"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="quick-courtesy">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="alfa-romeo"/>
+			<xs:enumeration value="audi"/>
+			<xs:enumeration value="bmw"/>
+			<xs:enumeration value="chrysler"/>
+			<xs:enumeration value="daewoo"/>
+			<xs:enumeration value="ford"/>
+			<xs:enumeration value="gm"/>
+			<xs:enumeration value="honda"/>
+			<xs:enumeration value="hyundai"/>
+			<xs:enumeration value="isuzu"/>
+			<xs:enumeration value="jaguar"/>
+			<xs:enumeration value="kia"/>
+			<xs:enumeration value="landrover"/>
+			<xs:enumeration value="mazda"/>
+			<xs:enumeration value="mercedes-benz"/>
+			<xs:enumeration value="mitsubishi"/>
+			<xs:enumeration value="nissan"/>
+			<xs:enumeration value="porsche"/>
+			<xs:enumeration value="saab"/>
+			<xs:enumeration value="subaru"/>
+			<xs:enumeration value="suzuki"/>
+			<xs:enumeration value="toyota"/>
+			<xs:enumeration value="volkswagen"/>
+			<xs:enumeration value="volvo"/>
+			<xs:enumeration value="yugo"/>
+			<xs:enumeration value="Honda"/>
+			<xs:enumeration value="Mercedes-Benz"/>
+			<xs:enumeration value="Suzuki"/>
+			<xs:enumeration value="Alfa-Romeo"/>
+			<xs:enumeration value="Audi"/>
+			<xs:enumeration value="BMW"/>
+			<xs:enumeration value="Chrysler"/>
+			<xs:enumeration value="Daewoo"/>
+			<xs:enumeration value="Ford"/>
+			<xs:enumeration value="GM"/>
+			<xs:enumeration value="Hyundai"/>
+			<xs:enumeration value="Isuzu"/>
+			<xs:enumeration value="Jaguar"/>
+			<xs:enumeration value="Kia"/>
+			<xs:enumeration value="LandRover"/>
+			<xs:enumeration value="Mazda"/>
+			<xs:enumeration value="Mitsubishi"/>
+			<xs:enumeration value="Nissan"/>
+			<xs:enumeration value="Porsche"/>
+			<xs:enumeration value="Saab"/>
+			<xs:enumeration value="Subaru"/>
+			<xs:enumeration value="Toyota"/>
+			<xs:enumeration value="Volkswagen"/>
+			<xs:enumeration value="Volvo"/>
+			<xs:enumeration value="Yugo"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="r-i">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="r-o-i">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="reassem">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="ref-num" type="xs:string"/>
+
+	<xs:attributeGroup name="refs">
+		<xs:attribute name="id" type="xs:ID" use="optional"/>
+	</xs:attributeGroup>
+
+	<xs:element name="row">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element maxOccurs="unbounded" ref="entry"/>
+			</xs:sequence>
+			<xs:attribute name="rowsep" type="xs:integer"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="sens-rng">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="serv-cat">
+		<xs:complexType>
+			<xs:attribute name="servcat.name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:simpleType name="servcat.child">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ae-accessories.control.systems"/>
+			<xs:enumeration value="ae-aerodynamic.devices"/>
+			<xs:enumeration value="ae-antenna.systems"/>
+			<xs:enumeration value="ae-body.and.cab.control.systems"/>
+			<xs:enumeration value="ae-cab.mounting.htr"/>
+			<xs:enumeration value="e-cab.structure.htr"/>
+			<xs:enumeration value="ae-cab.suspension.htr"/>
+			<xs:enumeration value="ae-cargo.handling.lifts.htr"/>
+			<xs:enumeration value="ae-collision.avoidance"/>
+			<xs:enumeration value="ae-communication.devices"/>
+			<xs:enumeration value="ae-cruise.control.systems"/>
+			<xs:enumeration value="ae-door.locks.and.antitheft.systems"/>
+			<xs:enumeration value="ae-entertainment.systems"/>
+			<xs:enumeration value="ae-exterior.body.panels"/>
+			<xs:enumeration value="ae-exterior.interior.trim"/>
+			<xs:enumeration value="ae-exterior.lights"/>
+			<xs:enumeration value="ae-fenders"/>
+			<xs:enumeration value="ae-frames.subframes.and.crossmembers"/>
+			<xs:enumeration value="ae-gauges.and.instrument.panels"/>
+			<xs:enumeration value="ae-headlight.doors"/>
+			<xs:enumeration value="ae-headlights"/>
+			<xs:enumeration value="ae-heated.glass.defoggers"/>
+			<xs:enumeration value="ae-hood"/>
+			<xs:enumeration value="ae-horns"/>
+			<xs:enumeration value="ae-ignition.switch.steering.lock"/>
+			<xs:enumeration value="ae-interior.illumination.lights"/>
+			<xs:enumeration value="ae-memory.modules"/>
+			<xs:enumeration value="ae-mirrors"/>
+			<xs:enumeration value="ae-navigation.system"/>
+			<xs:enumeration value="ae-paint.coatings"/>
+			<xs:enumeration value="ae-passenger.doors"/>
+			<xs:enumeration value="ae-rear.hatches.and.deck"/>
+			<xs:enumeration value="ae-seats"/>
+			<xs:enumeration value="ae-sleeper.cab.htr"/>
+			<xs:enumeration value="ae-steering.column.switches"/>
+			<xs:enumeration value="ae-sun.roof.t.top.convertible.top"/>
+			<xs:enumeration value="ae-towing.systems"/>
+			<xs:enumeration value="ae-vacuum.pumps.lines.tanks.water.trap.htr"/>
+			<xs:enumeration value="ae-vacuum.pumps.vacuum.operated.accessories"/>
+			<xs:enumeration value="ae-warning.system"/>
+			<xs:enumeration value="ae-windows"/>
+			<xs:enumeration value="ae-wiper.washer.systems"/>
+			<xs:enumeration value="ae-wiring.system"/>
+			<xs:enumeration value="brakes-air.brake.chambers.htr"/>
+			<xs:enumeration value="brakes-air.brake.valves.htr"/>
+			<xs:enumeration value="brakes-air.brake.warning.devices.htr"/>
+			<xs:enumeration value="brakes-air.compressors.htr"/>
+			<xs:enumeration value="brakes-air.dryers.htr"/>
+			<xs:enumeration value="brakes-air.piping.diagrams.htr"/>
+			<xs:enumeration value="brakes-antilock.traction.control"/>
+			<xs:enumeration value="brakes-control.systems"/>
+			<xs:enumeration value="brakes-engine.brakes.htr"/>
+			<xs:enumeration value="brakes-hose.tubing.fittings.and.reservoirs.htr"/>
+			<xs:enumeration value="brakes-mechanical.and.air.htr"/>
+			<xs:enumeration value="brakes-mechanical.and.hydraulic"/>
+			<xs:enumeration value="brakes-parking.brake.system"/>
+			<xs:enumeration value="brakes-slack.adjusters.htr"/>
+			<xs:enumeration value="brakes-speed.retarder.system.htr"/>
+			<xs:enumeration value="brakes-traction.control"/>
+			<xs:enumeration value="brakes-trailer.brake.connections.htr"/>
+			<xs:enumeration value="driveline.axles-axle.shafts"/>
+			<xs:enumeration value="driveline.axles-differentials.and.drive.axles"/>
+			<xs:enumeration value="driveline.axles-driveline.and.axles.control.systems"/>
+			<xs:enumeration value="driveline.axles-driveshaft.and.universal.joints"/>
+			<xs:enumeration value="driveline.axles-locking.hubs"/>
+			<xs:enumeration value="driveline.axles-wheel.hubs"/>
+			<xs:enumeration value="electrical-body.electrical"/>
+			<xs:enumeration value="electrical-charging.system"/>
+			<xs:enumeration value="electrical-component.locations"/>
+			<xs:enumeration value="electrical-fuses.and.circuit.breakers"/>
+			<xs:enumeration value="electrical-wiring.diagram"/>
+			<xs:enumeration value="engine-accessory.drive.belts"/>
+			<xs:enumeration value="engine-auxiliary.emission.control.systems"/>
+			<xs:enumeration value="engine-blowers.superchargers.turbochargers"/>
+			<xs:enumeration value="engine-control.systems"/>
+			<xs:enumeration value="engine-cooling.fan"/>
+			<xs:enumeration value="engine-cooling.system.mechanical"/>
+			<xs:enumeration value="engine-electronic.engine.alarms"/>
+			<xs:enumeration value="engine-electronic.governor"/>
+			<xs:enumeration value="engine-electronic.shutdown.system"/>
+			<xs:enumeration value="engine-exhaust"/>
+			<xs:enumeration value="engine-fuel.system"/>
+			<xs:enumeration value="engine-glow.plug"/>
+			<xs:enumeration value="engine-ignition.system"/>
+			<xs:enumeration value="engine-lubrication.system"/>
+			<xs:enumeration value="engine-mechanical"/>
+			<xs:enumeration value="engine-power.takeoff"/>
+			<xs:enumeration value="engine-starter"/>
+			<xs:enumeration value="engine-timing.belt"/>
+			<xs:enumeration value="engine-tune-up"/>
+			<xs:enumeration value="ep-adjustment"/>
+			<xs:enumeration value="ep-application"/>
+			<xs:enumeration value="ep-emission.application"/>
+			<xs:enumeration value="ep-fault.isolation"/>
+			<xs:enumeration value="ep-pin.voltage.charts"/>
+			<xs:enumeration value="ep-remove.and.overhaul.and.install"/>
+			<xs:enumeration value="ep-sensor.range.charts"/>
+			<xs:enumeration value="ep-specifications"/>
+			<xs:enumeration value="ep-system"/>
+			<xs:enumeration value="ep-theory.and.operation"/>
+			<xs:enumeration value="ep-tuneup"/>
+			<xs:enumeration value="ep-vacuum.diagrams"/>
+			<xs:enumeration value="ep-wiring.diagrams"/>
+			<xs:enumeration value="frame.frame.accessories-ball.hitch.htr"/>
+			<xs:enumeration value="frame.frame.accessories-frame.htr"/>
+			<xs:enumeration value="frame.frame.accessories-landing.gear.htr"/>
+			<xs:enumeration value="frame.frame.accessories-pintel.hook.htr"/>
+			<xs:enumeration value="geninfo-abbreviations"/>
+			<xs:enumeration value="geninfo-ae"/>
+			<xs:enumeration value="geninfo-basic.trouble.shooting"/>
+			<xs:enumeration value="geninfo-brakes"/>
+			<xs:enumeration value="geninfo-check.lists"/>
+			<xs:enumeration value="geninfo-computer.relearn"/>
+			<xs:enumeration value="geninfo-dealer.information"/>
+			<xs:enumeration value="geninfo-drive.cycles"/>
+			<xs:enumeration value="geninfo-driveline.axles"/>
+			<xs:enumeration value="geninfo-electrical"/>
+			<xs:enumeration value="geninfo-engine"/>
+			<xs:enumeration value="geninfo-ep"/>
+			<xs:enumeration value="geninfo-exhaust"/>
+			<xs:enumeration value="geninfo-hazardous.waste.material"/>
+			<xs:enumeration value="geninfo-hoist.jack"/>
+			<xs:enumeration value="geninfo-hvac"/>
+			<xs:enumeration value="geninfo-identification"/>
+			<xs:enumeration value="geninfo-metric.conversions"/>
+			<xs:enumeration value="geninfo-oem.general.information"/>
+			<xs:enumeration value="geninfo-reset.procedures"/>
+			<xs:enumeration value="geninfo-restraints"/>
+			<xs:enumeration value="geninfo-rpo.codes"/>
+			<xs:enumeration value="geninfo-specifications.index"/>
+			<xs:enumeration value="geninfo-steering"/>
+			<xs:enumeration value="geninfo-suspension"/>
+			<xs:enumeration value="geninfo-towing"/>
+			<xs:enumeration value="geninfo-traction.control.disable"/>
+			<xs:enumeration value="geninfo-transmission"/>
+			<xs:enumeration value="hvac-a.c.compressor"/>
+			<xs:enumeration value="hvac-automatic.hvac.system"/>
+			<xs:enumeration value="hvac-cooling.fans"/>
+			<xs:enumeration value="hvac-general.servicing"/>
+			<xs:enumeration value="hvac-heater"/>
+			<xs:enumeration value="hvac-hvac.control.systems"/>
+			<xs:enumeration value="hvac-manual.hvac.system"/>
+			<xs:enumeration value="hvac-solar.ventilation"/>
+			<xs:enumeration value="maintenance-procedures"/>
+			<xs:enumeration value="maintenance-schedule"/>
+			<xs:enumeration value="restraints-airbag"/>
+			<xs:enumeration value="restraints-control.systems"/>
+			<xs:enumeration value="restraints-passive"/>
+			<xs:enumeration value="steering-column"/>
+			<xs:enumeration value="steering-control.systems"/>
+			<xs:enumeration value="steering-electronic"/>
+			<xs:enumeration value="steering-gear"/>
+			<xs:enumeration value="steering-linkage"/>
+			<xs:enumeration value="steering-manual.power"/>
+			<xs:enumeration value="suspension-control.systems"/>
+			<xs:enumeration value="suspension-electronic"/>
+			<xs:enumeration value="suspension-front"/>
+			<xs:enumeration value="suspension-rear"/>
+			<xs:enumeration value="suspension-wheel.alignment"/>
+			<xs:enumeration value="suspension-wheel.and.tire.systems"/>
+			<xs:enumeration value="trans-automatic"/>
+			<xs:enumeration value="trans-auxiliary.transmission.htr"/>
+			<xs:enumeration value="trans-clutches.manual.and.hydraulic"/>
+			<xs:enumeration value="trans-control.systems"/>
+			<xs:enumeration value="trans-hydraulic.diagrams"/>
+			<xs:enumeration value="trans-manual"/>
+			<xs:enumeration value="trans-overdrive.unit"/>
+			<xs:enumeration value="trans-transfer.case"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="service">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="sid.code">
+		<xs:complexType>
+			<xs:attribute name="mid" type="xs:string" use="required"/>
+			<xs:attribute name="sid" type="xs:string" use="required"/>
+			<xs:attribute name="fmi" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="softextxref">
+		<xs:complexType mixed="true">
+			<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+			<xs:attribute name="servcat.child" type="servcat.child" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="spanspec">
+		<xs:complexType>
+			<xs:attribute name="namest" type="xs:NMTOKEN"/>
+			<xs:attribute name="nameend" type="xs:NMTOKEN"/>
+			<xs:attribute name="spanname" type="xs:NMTOKEN"/>
+			<xs:attribute name="align" type="align"/>
+			<xs:attribute name="charoff" type="xs:NMTOKEN"/>
+			<xs:attribute name="char" type="xs:string"/>
+			<xs:attribute name="colsep" type="xs:integer"/>
+			<xs:attribute name="rowsep" type="xs:integer"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="special-tools">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="specs">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+			<xs:attribute name="specs-type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="emission"/>
+						<xs:enumeration value="engine-application"/>
+						<xs:enumeration value="fulid"/>
+						<xs:enumeration value="electrical"/>
+						<xs:enumeration value="pin-volts"/>
+						<xs:enumeration value="sensor"/>
+						<xs:enumeration value="torque"/>
+						<xs:enumeration value="component-aplication"/>
+						<xs:enumeration value="mechanical"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>	
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="spn.code">
+		<xs:complexType>
+			<xs:attribute name="sa" type="xs:string" use="required"/>
+			<xs:attribute name="spn" type="xs:string" use="required"/>
+			<xs:attribute name="fmi" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="src-pages">
+		<xs:complexType>
+			<xs:attribute name="pages" use="required" type="xs:integer"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="su-date" type="xs:string"/>
+
+	<xs:element name="su-mfg" type="xs:string"/>
+
+	<xs:element name="su-num" type="xs:string"/>
+
+	<xs:element name="sub" type="xs:string"/>
+
+	<xs:element name="sup" type="xs:string"/>
+	
+	<xs:element name="superced">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="su-mfg" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="su-num" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element ref="su-date" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name="symp">
+		<xs:attribute name="servcat" type="xs:string" use="required"/>
+		<xs:attribute name="symptom" type="xs:string"/>
+		<xs:attribute name="system-comp" type="xs:string"/>
+	</xs:attributeGroup>
+
+	<xs:simpleType name="system">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="engine"/>
+			<xs:enumeration value="transmission"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="t-code" type="xs:string"/>
+
+	<xs:element name="t-desc">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="t-title" minOccurs="1" maxOccurs="1"/>
+				<xs:element ref="t-info" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>	
+	</xs:element>
+
+	<xs:element name="t-info" type="xs:string"/>
+
+	<xs:element name="t-title" type="xs:string"/>
+	
+	<xs:element name="table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:element ref="title"/>
+				<xs:element ref="tgroup" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="vdo"/>
+			<xs:attributeGroup ref="refs"/>
+			<xs:attribute name="component-locator" use="optional" type="component-locator" default="isnt"/>
+			<xs:attribute name="index-type" type="index-type" default="none"/>
+			<xs:attribute name="tlead" use="required" type="yesno"/>
+			<xs:attribute name="twidth" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="tbody">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:group ref="oe.dtc"/>
+				<xs:element ref="row"/>
+			</xs:choice>
+			<xs:attribute name="valign" type="valign"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="tec-head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ref-num" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element ref="date" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="superced" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="t-desc" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>	
+	</xs:element>
+	
+	<xs:element name="term">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="oe.dtc"/>
+				<xs:group ref="float"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="testing">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+			<xs:attribute name="test-type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="wiring"/>
+						<xs:enumeration value="vacuum"/>
+						<xs:enumeration value="hydraul"/>
+						<xs:enumeration value="mechanical"/>
+						<xs:enumeration value="component-location"/>
+					</xs:restriction>
+				</xs:simpleType>	
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="tgroup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="colspec"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="spanspec"/>
+				<xs:element minOccurs="0" maxOccurs="1" ref="thead"/>
+				<xs:element ref="tbody"/>
+			</xs:sequence>
+			<xs:attribute name="cols" use="required" type="xs:integer"/>
+			<xs:attribute name="colsep" type="xs:integer"/>
+			<xs:attribute name="rowsep" type="xs:integer"/>
+			<xs:attribute name="align" type="align"/>
+			<xs:attribute name="charoff" type="xs:NMTOKEN"/>
+			<xs:attribute name="char" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="thead">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:group minOccurs="0" ref="oe.dtc"/>
+				<xs:element ref="row"/>
+			</xs:choice>
+			<xs:attribute name="valign" type="valign"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="theoryop">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="title">
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded">
+				<xs:group minOccurs="0" maxOccurs="unbounded" ref="oe.dtc"/>
+				<xs:group ref="float"/>
+				<xs:element ref="component"/>
+				<xs:element ref="icon"/>
+			</xs:choice>
+			<xs:attributeGroup ref="vdo"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="trbshoot">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="info-obj"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:simpleType name="valign">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="top"/>
+			<xs:enumeration value="middle"/>
+			<xs:enumeration value="bottom"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:attributeGroup name="vdo">
+		<xs:attribute name="code.type" type="code.type" use="optional"/>
+		<xs:attribute name="code.name" type="xs:string" use="optional"/>
+	</xs:attributeGroup>
+
+	<xs:simpleType name="vehtype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="car"/>
+			<xs:enumeration value="truck"/>
+			<xs:enumeration value="van"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="vin-rang" type="xs:string"/>
+
+	<xs:element name="warning" type="cnwicontent"/>
+
+	<xs:simpleType name="yesno">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="yes"/>
+			<xs:enumeration value="no"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="yn">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="y"/>
+			<xs:enumeration value="n"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
